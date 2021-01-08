@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 
 
 const routes: Routes = [
@@ -22,11 +22,18 @@ const routes: Routes = [
     path: 'cart',
     pathMatch: 'full',
     loadChildren: () => import('./pages/cart/cart.module').then(m => m.CartModule)
+  },
+  {
+    path: 'auth',
+    pathMatch: 'full',
+    loadChildren: () => import('./pages/auth/auth.module').then(m => m.AuthModule)
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {
+    preloadingStrategy: PreloadAllModules
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
