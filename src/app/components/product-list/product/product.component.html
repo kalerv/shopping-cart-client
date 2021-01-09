@@ -1,0 +1,22 @@
+<div class="card product">
+  <div class="exclusive" *ngIf="product.exclusive">Exclusive</div>
+  <img [src]="product.image" class="card-img-top w-100" [alt]="product.title" />
+  <div class="card-body">
+    <div class="title">
+      <h5 class="card-title">{{ product.title }}</h5>
+    </div>
+    <div class="description">
+      <p class="card-text">
+        {{ product.description }}
+      </p>
+    </div>
+    <p class="price lead">Price: {{ product.price | currency }}</p>
+
+    <div class="actions mt-3">
+      <button class="btn btn-primary mr-2">Buy Now</button>
+      <button class="btn btn-secondary" (click)="addToCart()">
+        Add to cart
+      </button>
+    </div>
+  </div>
+</div>

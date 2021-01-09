@@ -1,1 +1,9 @@
-<p>products works!</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 my-4">
+      <h1>Products Page</h1>
+    </div>
+  </div>
+</div>
+
+<app-product-list [products]="products$ | async"></app-product-list>

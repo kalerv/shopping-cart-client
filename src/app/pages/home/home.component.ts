@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Product } from 'app/models/product.interface';
+import { ProductService } from 'app/services/product.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -6,10 +9,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  products$: Observable<Product[]>;
+  constructor(private productsService: ProductService) { }
 
-  constructor() { }
-
-  ngOnInit() {
+  ngOnInit () {
+    this.products$ = this.productsService.getAllExclusiveProducts();
   }
 
 }

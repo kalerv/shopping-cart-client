@@ -1,1 +1,15 @@
-<p>home works!</p>
+<div class="home pb-4">
+  <div class="bg-image"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-md-12">
+        <h1 class="mt-4 text-center">Welcome to Online Shopping system.</h1>
+        <p class="lead text-center">
+          Some of the exclusive products are shown below, to see the full list
+          to products <a routerLink="/products">Click Here</a>
+        </p>
+      </div>
+      <app-product-list [products]="products$ | async"></app-product-list>
+    </div>
+  </div>
+</div>

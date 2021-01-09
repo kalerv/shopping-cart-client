@@ -31,7 +31,13 @@
     </ul>
     <ul class="navbar-nav my-2 my-lg-0">
       <li class="nav-item dropdown" routerLinkActive="active">
-        <a class="nav-link dropdown-toggle" routerLink="/cart">Cart</a>
+        <a class="nav-link dropdown-toggle" routerLink="/cart"
+          >Cart
+          <span class="badge badge-success">{{
+            (cart$ | async).totalItems
+          }}</span>
+        </a>
+        {{ cart$ | async | json }}
       </li>
     </ul>
   </div>
