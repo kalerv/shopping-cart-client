@@ -11,7 +11,11 @@
   >
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+  <div
+    class="collapse navbar-collapse"
+    id="navbarNavDropdown"
+    *ngIf="user$ | async as user"
+  >
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
       <li
         class="nav-item"
@@ -30,14 +34,21 @@
       </li>
     </ul>
     <ul class="navbar-nav my-2 my-lg-0">
+      <li class="nav-item" routerLinkActive="active">
+        <p class="mb-0 mt-2 bold">Welcome {{ user.fullName }}</p>
+      </li>
       <li class="nav-item dropdown" routerLinkActive="active">
-        <a class="nav-link dropdown-toggle" routerLink="/cart"
-          >Cart
+        <a class="nav-link" routerLink="/cart"
+          >Cart Items
           <span class="badge badge-success">{{
             (cart$ | async).totalItems
           }}</span>
         </a>
-        {{ cart$ | async | json }}
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" style="cursor: pointer" (click)="onLogout()"
+          >Logout</a
+        >
       </li>
     </ul>
   </div>

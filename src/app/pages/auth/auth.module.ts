@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { AuthComponent } from './auth/auth.component';
 import { AuthRoutingModule } from './auth/auth.routing.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from '@shared/shared.module';
 
 
 
@@ -10,7 +12,11 @@ import { AuthRoutingModule } from './auth/auth.routing.module';
   declarations: [AuthComponent],
   imports: [
     CommonModule,
-    AuthRoutingModule
-  ]
+    AuthRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    SharedModule
+  ],
+  providers: []
 })
 export class AuthModule { }

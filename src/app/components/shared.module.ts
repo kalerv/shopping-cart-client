@@ -5,6 +5,8 @@ import { ProductComponent } from '@shared/product-list/product/product.component
 import { HttpClientModule } from '@angular/common/http';
 import { ProductService } from 'app/services/product.service';
 import { CartService } from 'app/services/cart.service';
+import { AuthService } from 'app/services/auth.service';
+import { AuthGuard } from 'app/guards/auth.guard';
 
 const COMPONENTS = [ProductListComponent, ProductComponent];
 
@@ -15,7 +17,7 @@ const COMPONENTS = [ProductListComponent, ProductComponent];
     CommonModule,
     HttpClientModule
   ],
-  providers: [ProductService, CartService],
+  providers: [ProductService, CartService, AuthService, AuthGuard],
   exports: COMPONENTS
 })
 export class SharedModule { }
