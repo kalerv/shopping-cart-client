@@ -1,9 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { ProductActions } from '@shared/product-list/actions/products-actions-types';
+import { getExclusiveProducts } from '@shared/product-list/selectors/products.selector';
 import { Product } from 'app/models/product.interface';
-import { ProductService } from 'app/services/product.service';
+import { AppState } from 'app/reducers';
 import { Observable, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -12,13 +14,12 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class HomeComponent implements OnInit, OnDestroy {
   unSubscribe$ = new Subject<void>();
-  products: Product[];
-  constructor(private route: ActivatedRoute) { }
+  products$: Observable<Product[]>;
+  constructor(private store: Store<AppState>) { }
 
   ngOnInit () {
-    this.route.data.pipe(takeUntil(this.unSubscribe$)).subscribe((data: { exclusiveProducts: Product[] }) => {
-      this.products = data.exclusiveProducts.filter(p => p.exclusive);
-    })
+    this.store.dispatch(ProductActions.loadProducts())
+    this.products$ = this.store.select(getExclusiveProducts);
   }
   ngOnDestroy () {
     this.unSubscribe$.next();

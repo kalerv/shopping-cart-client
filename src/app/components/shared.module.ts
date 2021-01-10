@@ -7,7 +7,10 @@ import { ProductService } from 'app/services/product.service';
 import { CartService } from 'app/services/cart.service';
 import { AuthService } from 'app/services/auth.service';
 import { AuthGuard } from 'app/guards/auth.guard';
-import { ProductResolver } from 'app/resolvers/product.resolver';
+import { StoreModule } from '@ngrx/store';
+import * as fromProducts from './product-list/reducers';
+import { EffectsModule } from '@ngrx/effects';
+import { ProductsEffect } from './product-list/effects/products.effect';
 
 const COMPONENTS = [ProductListComponent, ProductComponent];
 
@@ -16,9 +19,11 @@ const COMPONENTS = [ProductListComponent, ProductComponent];
   declarations: COMPONENTS,
   imports: [
     CommonModule,
-    HttpClientModule
+    HttpClientModule,
+    StoreModule.forFeature('products', fromProducts.productsReducer),
+    EffectsModule.forFeature([ProductsEffect])
   ],
-  providers: [ProductService, CartService, AuthService, AuthGuard, ProductResolver],
+  providers: [ProductService, CartService, AuthService, AuthGuard],
   exports: COMPONENTS
 })
 export class SharedModule { }

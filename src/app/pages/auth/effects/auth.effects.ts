@@ -24,7 +24,6 @@ export class AuthEffects {
       .pipe(
         ofType(AuthActions.loginSuccess),
         tap(action => {
-          console.log(action.type)
           localStorage.setItem('user', JSON.stringify(action.user));
           this.router.navigateByUrl('/home');
         })
