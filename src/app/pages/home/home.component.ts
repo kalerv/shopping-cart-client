@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Product } from 'app/models/product.interface';
 import { ProductService } from 'app/services/product.service';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -9,11 +11,15 @@ import { Observable } from 'rxjs';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  products$: Observable<Product[]>;
-  constructor(private productsService: ProductService) { }
+  unSubscribe$ = new Subject<void>();
+  products: Product[];
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit () {
-    this.products$ = this.productsService.getAllExclusiveProducts();
+    this.route.data.pipe(takeUntil(this.unSubscribe$)).subscribe((data: { exclusiveProducts: Product[] }) => {
+      this.products = data.exclusiveProducts.filter(p => p.exclusive);
+      console.log(this.products)
+    })
   }
 
 }

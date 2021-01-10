@@ -7,6 +7,7 @@ import { ProductService } from 'app/services/product.service';
 import { CartService } from 'app/services/cart.service';
 import { AuthService } from 'app/services/auth.service';
 import { AuthGuard } from 'app/guards/auth.guard';
+import { ProductResolver } from 'app/resolvers/product.resolver';
 
 const COMPONENTS = [ProductListComponent, ProductComponent];
 
@@ -17,7 +18,7 @@ const COMPONENTS = [ProductListComponent, ProductComponent];
     CommonModule,
     HttpClientModule
   ],
-  providers: [ProductService, CartService, AuthService, AuthGuard],
+  providers: [ProductService, CartService, AuthService, AuthGuard, ProductResolver],
   exports: COMPONENTS
 })
 export class SharedModule { }
