@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" routerLink="/">Online Shopping</a>
+  <a class="navbar-brand" routerLink="/home">Online Shopping</a>
   <button
     class="navbar-toggler"
     type="button"
@@ -14,7 +14,7 @@
   <div
     class="collapse navbar-collapse"
     id="navbarNavDropdown"
-    *ngIf="user$ | async as user"
+    *ngIf="isLoggedIn$ | async"
   >
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
       <li
@@ -22,7 +22,7 @@
         routerLinkActive="active"
         [routerLinkActiveOptions]="{ exact: true }"
       >
-        <a class="nav-link" routerLink="/"
+        <a class="nav-link" routerLink="/home"
           >Home <span class="sr-only">(current)</span></a
         >
       </li>
@@ -34,9 +34,6 @@
       </li>
     </ul>
     <ul class="navbar-nav my-2 my-lg-0">
-      <li class="nav-item" routerLinkActive="active">
-        <p class="mb-0 mt-2 bold">Welcome {{ user.fullName }}</p>
-      </li>
       <li class="nav-item dropdown" routerLinkActive="active">
         <a class="nav-link" routerLink="/cart"
           >Cart Items

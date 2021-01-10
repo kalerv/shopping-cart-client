@@ -1,7 +1,10 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
+import { Store } from "@ngrx/store";
 import { User } from "app/models/user.interface";
+import { AuthActions } from "app/pages/auth/actions/auth-actions.types";
+import { AppState } from "app/reducers";
 import { BehaviorSubject, Observable } from "rxjs";
 import { map } from "rxjs/operators";
 import { environment } from '../../environments/environment';
@@ -10,7 +13,7 @@ export class AuthService {
   private userSubject = new BehaviorSubject<User>(null);
   user$ = this.userSubject.asObservable();
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient, private router: Router, private store: Store<AppState>) {
     this.checkUserLoggedIn();
   }
   login (email, password): Observable<User> {
@@ -21,15 +24,16 @@ export class AuthService {
   }
   private performLogin (user) {
     this.userSubject.next(user);
-    localStorage.setItem('user', JSON.stringify(user));
-    this.router.navigate(['../']);
+    // localStorage.setItem('user', JSON.stringify(user));
+
   }
   private checkUserLoggedIn (): void {
-    const user = JSON.parse(localStorage.getItem('user'));
-    if (user) {
-      this.userSubject.next(user);
-      this.router.navigate(['../']);
-    }
+    // let user = localStorage.getItem('user');
+    // if (user) {
+    //   user = JSON.parse(user)
+    //   this.userSubject.next(user);
+    //   this.store.dispatch(AuthActions.login(user))
+    // }
   }
   logOut (): void {
     localStorage.removeItem('user');

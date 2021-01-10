@@ -1,13 +1,14 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AuthComponent } from './auth.component';
+import { AuthGuard } from 'app/guards/auth.guard';
+import { LoginComponent } from './login.component';
 
 
 const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    component: AuthComponent,
+    component: LoginComponent
   }
 ];
 @NgModule({
