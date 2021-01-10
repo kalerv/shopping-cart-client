@@ -12,7 +12,6 @@ export class ProductService {
   fetchAllProducts (): Observable<Product[]> {
     return this.http.get<Product[]>(`${environment.products}`).pipe(
       map(p => {
-        console.log(p)
         this.productsChanged.next(p['data']);
         this.products = p['data'].slice();
         return p['data'];
