@@ -38,7 +38,7 @@
         <a class="nav-link" routerLink="/cart"
           >Cart Items
           <span class="badge badge-success">{{
-            (cart$ | async).totalItems
+            (cart$ | async)?.totalItems || 0
           }}</span>
         </a>
       </li>

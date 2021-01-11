@@ -6,4 +6,8 @@
   </div>
 </div>
 
-<app-product-list [products]="products$ | async"></app-product-list>
+<app-product-list
+  [products]="products$ | async"
+  (addToCartClicked)="onAddToCart($event)"
+  (buyNowClicked)="onBuyNow($event)"
+></app-product-list>

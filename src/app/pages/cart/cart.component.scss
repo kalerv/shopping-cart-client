@@ -1,0 +1,39 @@
+.cart {
+  .item {
+    max-width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    img {
+      width: 50px;
+      border-radius: 5px;
+    }
+    .details {
+      h5 {
+        width: 200px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        padding: 20px;
+        font-size: 1.3rem;
+        margin: 0;
+        background: white;
+        resize: horizontal;
+      }
+    }
+  }
+  .misc {
+    height: 50px;
+    p {
+      margin: 0;
+    }
+  }
+  .actions {
+    button {
+      height: 30px;
+      padding-top: 2px;
+      margin-right: 4px;
+    }
+  }
+}

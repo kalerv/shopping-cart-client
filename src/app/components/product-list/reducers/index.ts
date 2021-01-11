@@ -11,7 +11,6 @@ export const initialProductsState: ProductsState = {
 export const productsReducer = createReducer(
   initialProductsState,
   on(ProductActions.productsLoaded, (state, action) => {
-    console.log('Products added reducer')
     return { products: action.products }
   })
 )

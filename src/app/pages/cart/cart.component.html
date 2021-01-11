@@ -1,1 +1,107 @@
-<p>cart works!</p>
+<div class="cart pb-4">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-md-12">
+        <h1 class="mt-4 text-center">Shopping Cart</h1>
+
+        <div *ngIf="!(cart$ | async)?.totalItems; else hasCartItems">
+          <p
+            class="alert"
+            [ngClass]="{
+              'alert-warning': !isCheckoutPerformed,
+              'alert-success': isCheckoutPerformed
+            }"
+          >
+            {{
+              isCheckoutPerformed
+                ? "Your order has been placed!"
+                : "Cart ie empty!"
+            }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #hasCartItems>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Items Details</th>
+        <th scope="col">Price</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cartItem of (cart$ | async)?.cartItems; let i = index">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>
+          <div class="item">
+            <img
+              [src]="cartItem.product.image"
+              [alt]="cartItem.product.title"
+            />
+            <div class="details">
+              <h5 [title]="cartItem.product.title">
+                {{ cartItem.product.title }}
+              </h5>
+            </div>
+          </div>
+        </td>
+        <td>
+          <div class="misc d-flex align-items-center">
+            <p class="lead">{{ cartItem?.totalPrice | currency }}</p>
+          </div>
+        </td>
+        <td>
+          <div class="misc d-flex align-items-center">
+            <p class="lead">{{ cartItem?.quantity }}</p>
+          </div>
+        </td>
+        <td>
+          <div class="misc actions">
+            <button
+              class="btn btn-success"
+              title="Increase Quantity"
+              (click)="onIncreaseQuantity(cartItem.product)"
+            >
+              +
+            </button>
+            <button
+              class="btn btn-warning"
+              title="Decrease Quantity"
+              [disabled]="cartItem.quantity === 1"
+              (click)="onDecreaseQuantity(cartItem.product)"
+            >
+              -
+            </button>
+            <button
+              class="btn btn-danger"
+              title="Delete Item"
+              (click)="onDeleteItem(cartItem.product)"
+            >
+              X
+            </button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <hr />
+  <div class="d-flex justify-content-end">
+    <div>
+      <p class="lead m-0">
+        Sub total: {{ (cart$ | async)?.totalPrice | currency }}
+      </p>
+      <button
+        class="btn btn-info mt-1"
+        [disabled]="(cart$ | async)?.totalItems === 0"
+        (click)="onCheckOut()"
+      >
+        Checkout
+      </button>
+    </div>
+  </div>
+</ng-template>

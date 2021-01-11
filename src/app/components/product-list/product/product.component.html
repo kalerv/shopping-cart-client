@@ -13,8 +13,10 @@
     <p class="price lead">Price: {{ product.price | currency }}</p>
 
     <div class="actions mt-3">
-      <button class="btn btn-primary mr-2">Buy Now</button>
-      <button class="btn btn-secondary" (click)="addToCart()">
+      <button class="btn btn-primary mr-2" (click)="onBuyNow.emit(product)">
+        Buy Now
+      </button>
+      <button class="btn btn-secondary" (click)="onAddCart.emit(product)">
         Add to cart
       </button>
     </div>

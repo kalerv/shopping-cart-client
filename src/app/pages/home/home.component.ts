@@ -1,28 +1,34 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { ProductActions } from '@shared/product-list/actions/products-actions-types';
 import { getExclusiveProducts } from '@shared/product-list/selectors/products.selector';
 import { Product } from 'app/models/product.interface';
 import { AppState } from 'app/reducers';
-import { Observable, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
+import { CartActions } from '../cart/actions/cart-action-types';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit, OnDestroy {
-  unSubscribe$ = new Subject<void>();
+export class HomeComponent implements OnInit {
   products$: Observable<Product[]>;
-  constructor(private store: Store<AppState>) { }
+  userId: string;
+  constructor(private store: Store<AppState>, private router: Router) {
+    this.userId = JSON.parse(localStorage.getItem('user')).id;
+  }
 
   ngOnInit () {
     this.store.dispatch(ProductActions.loadProducts())
     this.products$ = this.store.select(getExclusiveProducts);
   }
-  ngOnDestroy () {
-    this.unSubscribe$.next();
-    this.unSubscribe$.complete();
+  onAddToCart (product: Product) {
+    this.store.dispatch(CartActions.addProductToCart({ product, userId: this.userId }));
+  }
+  onBuyNow (product: Product) {
+    this.store.dispatch(CartActions.addProductToCart({ product, userId: this.userId }));
+    this.router.navigateByUrl('/cart')
   }
 }

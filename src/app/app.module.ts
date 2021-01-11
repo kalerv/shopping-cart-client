@@ -23,11 +23,7 @@ import { AppEffects } from './app.effects';
     SharedModule,
     AuthModule,
     StoreModule.forRoot(reducers, {
-      metaReducers,
-      runtimeChecks: {
-        strictStateImmutability: true,
-        strictActionImmutability: true
-      }
+      metaReducers
     }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !environment.production }),
     EffectsModule.forRoot([AppEffects]),

@@ -9,7 +9,11 @@
           to products <a routerLink="/products">Click Here</a>
         </p>
       </div>
-      <app-product-list [products]="products$ | async"></app-product-list>
+      <app-product-list
+        [products]="products$ | async"
+        (addToCartClicked)="onAddToCart($event)"
+        (buyNowClicked)="onBuyNow($event)"
+      ></app-product-list>
     </div>
   </div>
 </div>

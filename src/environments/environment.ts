@@ -7,7 +7,9 @@ export const environment = {
   apiUrl: 'http://localhost:4200',
   login: 'api/login',
   cart: 'api/cart',
-  products: 'api/products'
+  products: 'api/products',
+  checkout: 'api/checkout',
+  orders: 'apa/orders'
 };
 
 /*

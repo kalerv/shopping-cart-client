@@ -1,8 +1,7 @@
 import { Product } from "./product.interface";
-import { User } from "./user.interface";
 
 export interface Cart {
-  user: User;
+  userId: string;
   cartItems: CartItem[];
   totalPrice: number;
   totalItems: number;
@@ -11,4 +10,5 @@ export interface Cart {
 export interface CartItem {
   product: Product;
   quantity: number;
+  totalPrice: number;
 }

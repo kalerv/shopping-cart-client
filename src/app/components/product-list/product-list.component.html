@@ -4,7 +4,11 @@
       class="col-xs-12 col-sm-6 col-md-4 mb-2"
       *ngFor="let product of products"
     >
-      <app-product [product]="product"></app-product>
+      <app-product
+        [product]="product"
+        (onBuyNow)="buyNowClicked.emit($event)"
+        (onAddCart)="addToCartClicked.emit($event)"
+      ></app-product>
     </div>
   </div>
 </div>

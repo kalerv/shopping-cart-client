@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { AuthService } from "app/services/auth.service";
-import { map, mergeMap, take, tap } from "rxjs/operators";
+import { map, switchMap, take, tap } from "rxjs/operators";
 import { AuthActions } from "../actions/auth-actions.types";
 
 @Injectable()
@@ -11,13 +11,12 @@ export class AuthEffects {
     this.actions$
       .pipe(
         ofType(AuthActions.login),
-        mergeMap(action => {
+        switchMap(action => {
           return this.authService.login(action.user.email, action.user.password).pipe(
             map(user => AuthActions.loginSuccess({ user }))
           )
-
         }), take(1)
-      ));
+      ), { dispatch: false });
 
   loginSuccess$ = createEffect(() =>
     this.actions$
@@ -33,15 +32,11 @@ export class AuthEffects {
     this.actions$
       .pipe(
         ofType(AuthActions.logout),
-        tap(action => {
+        tap(() => {
           localStorage.removeItem('user');
           this.router.navigateByUrl('/');
         })
       ), { dispatch: false })
 
-  constructor(private actions$: Actions, private router: Router, private authService: AuthService) {
-
-
-
-  }
+  constructor(private actions$: Actions, private router: Router, private authService: AuthService) { }
 }

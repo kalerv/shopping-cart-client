@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { User } from './models/user.interface';
 import { AuthActions } from './pages/auth/actions/auth-actions.types';
+import { CartActions } from './pages/cart/actions/cart-action-types';
 import { AppState } from './reducers';
 
 @Component({
@@ -10,11 +12,16 @@ import { AppState } from './reducers';
 })
 export class AppComponent implements OnInit {
   constructor(private store: Store<AppState>) { }
-  title = 'shopping-cart';
   ngOnInit () {
     const userProfile = localStorage.getItem('user');
     if (userProfile) {
-      this.store.dispatch(AuthActions.loginSuccess({ user: JSON.parse(userProfile) }));
+      const user: User = JSON.parse(userProfile);
+      this.store.dispatch(AuthActions.loginSuccess({ user }));
+      // this.loadCart(user.id)
     }
   }
+
+  // private loadCart (userId) {
+  //   this.store.dispatch(CartActions.getCartByUser({ userId }))
+  // }
 }
