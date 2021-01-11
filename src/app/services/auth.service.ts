@@ -17,7 +17,7 @@ export class AuthService {
     this.checkUserLoggedIn();
   }
   login (email, password): Observable<User> {
-    return this.http.post<User>(`${environment.login}`, { email, password }).pipe(map((u: User) => {
+    return this.http.post<User>(`${environment.apiUrl}${environment.login}`, { email, password }).pipe(map((u: User) => {
       this.performLogin(u['data']);
       return u['data'];
     }));

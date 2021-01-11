@@ -11,6 +11,6 @@ export class OrderService {
   constructor(private http: HttpClient) { }
 
   getOrders (userId: string): Observable<Order[]> {
-    return this.http.get(`${environment.orders}/${userId}`).pipe(map(r => r['data']));
+    return this.http.get(`${environment.apiUrl}${environment.orders}/${userId}`).pipe(map(r => r['data']));
   }
 }

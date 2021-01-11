@@ -8,7 +8,7 @@ export interface ProductsState {
 export const initialProductsState: ProductsState = {
   products: []
 }
-export const productsReducer = createReducer(
+const _productsReducer = createReducer(
   initialProductsState,
   on(ProductActions.productsLoaded, (state, action) => {
     return { products: action.products }
@@ -17,4 +17,8 @@ export const productsReducer = createReducer(
     return { products: null }
   })
 )
+
+export function productsReducer (state, action) {
+  return _productsReducer(state, action);
+}
 

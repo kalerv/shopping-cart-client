@@ -10,7 +10,7 @@ export class ProductService {
   private productsChanged = new Subject<Product[]>();
   constructor(private http: HttpClient) { }
   fetchAllProducts (): Observable<Product[]> {
-    return this.http.get<Product[]>(`${environment.products}`).pipe(
+    return this.http.get<Product[]>(`${environment.apiUrl}${environment.products}`).pipe(
       map(p => {
         this.productsChanged.next(p['data']);
         this.products = p['data'].slice();
@@ -27,6 +27,6 @@ export class ProductService {
     return this.products.slice().filter(p => p.exclusive);
   }
   getAllExclusiveProducts (): Observable<Product[]> {
-    return this.http.get<Product[]>(`${environment.products}`).pipe(map(prod => prod['data'].filter(p => p.exclusive)));
+    return this.http.get<Product[]>(`${environment.apiUrl}${environment.products}`).pipe(map(prod => prod['data'].filter(p => p.exclusive)));
   }
 }

@@ -11,7 +11,7 @@ const initialOrderState: OrderState = {
   orders: null
 }
 
-export const orderReducer = createReducer(
+const _orderReducer = createReducer(
   initialOrderState,
   on(OrderActions.ordersLoaded, (state, action) => {
     return {
@@ -24,3 +24,7 @@ export const orderReducer = createReducer(
     }
   })
 )
+
+export function orderReducer (state, action) {
+  return _orderReducer(state, action,)
+}

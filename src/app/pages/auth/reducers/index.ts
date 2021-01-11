@@ -10,7 +10,7 @@ export const initialAuthState: AuthState = {
 }
 
 
-export const authReducer = createReducer(
+const _authReducer = createReducer(
   initialAuthState,
   on(AuthActions.loginSuccess, (state, action) => {
     return { user: action.user }
@@ -21,4 +21,8 @@ export const authReducer = createReducer(
     }
   })
 )
+
+export function authReducer (state, action) {
+  return _authReducer(state, action);
+}
 

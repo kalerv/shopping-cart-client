@@ -8,7 +8,7 @@ export interface CartState {
 export const initialCartState: CartState = {
   cart: null
 }
-export const cartReducer = createReducer(
+const _cartReducer = createReducer(
   initialCartState,
   on(CartActions.cartLoaded, (state, actions) => {
     return { cart: actions.cart }
@@ -109,3 +109,7 @@ export const cartReducer = createReducer(
     return { cart: undefined }
   })
 );
+
+export function cartReducer (state, action) {
+  return _cartReducer(state, action);
+}
