@@ -19,7 +19,6 @@
         font-size: 1.3rem;
         margin: 0;
         background: white;
-        resize: horizontal;
       }
     }
   }
@@ -36,6 +35,24 @@
     align-items: center;
     p {
       margin: 0;
+    }
+  }
+  @media (max-width: 550px) {
+    .item {
+      max-width: 150px;
+      .details {
+        h5 {
+          max-width: 150px;
+        }
+      }
+    }
+    .actions {
+      display: flex;
+      button {
+        height: 30px;
+        padding-top: 2px;
+        margin-right: 4px;
+      }
     }
   }
 }

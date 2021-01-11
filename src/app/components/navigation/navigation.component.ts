@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { ProductActions } from '@shared/product-list/actions/products-actions-types';
 import { Cart } from 'app/models/cart.interface';
@@ -20,6 +20,8 @@ import { map, tap } from 'rxjs/operators';
   styleUrls: ['./navigation.component.scss']
 })
 export class NavigationComponent implements OnInit {
+  @ViewChild('toggleButton', { static: true }) toggleButton: ElementRef<HTMLButtonElement>;
+  @ViewChild('navDiv', { static: false }) navDiv: ElementRef<HTMLDivElement>;
   cart$: Observable<Cart>;
   isLoggedIn$: Observable<boolean>;
   constructor(private store: Store<AppState>) { }
@@ -35,5 +37,19 @@ export class NavigationComponent implements OnInit {
     this.store.dispatch(CartActions.cleanCart());
     this.store.dispatch(ProductActions.cleanProducts());
     this.store.dispatch(OrderActions.cleanOrders())
+    this.hideNav();
+  }
+  toggleNav () {
+    const isExpanded = this.toggleButton.nativeElement.getAttribute('aria-expanded')
+    if (isExpanded === 'false') {
+      this.toggleButton.nativeElement.setAttribute('aria-expanded', 'true');
+      this.navDiv.nativeElement.classList.add('show');
+    } else {
+      this.hideNav();
+    }
+  }
+  hideNav () {
+    this.toggleButton.nativeElement.setAttribute('aria-expanded', 'false');
+    this.navDiv.nativeElement.classList.remove('show');
   }
 }

@@ -1,6 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" routerLink="/home">Online Shopping</a>
   <button
+    #toggleButton
     class="navbar-toggler"
     type="button"
     data-toggle="collapse"
@@ -8,10 +9,12 @@
     aria-controls="navbarNavDropdown"
     aria-expanded="false"
     aria-label="Toggle navigation"
+    (click)="toggleNav()"
   >
     <span class="navbar-toggler-icon"></span>
   </button>
   <div
+    #navDiv
     class="collapse navbar-collapse"
     id="navbarNavDropdown"
     *ngIf="isLoggedIn$ | async"
@@ -22,20 +25,22 @@
         routerLinkActive="active"
         [routerLinkActiveOptions]="{ exact: true }"
       >
-        <a class="nav-link" routerLink="/home"
+        <a class="nav-link" routerLink="/home" (click)="hideNav()"
           >Home <span class="sr-only">(current)</span></a
         >
       </li>
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" routerLink="/products">Products</a>
+        <a class="nav-link" routerLink="/products" (click)="hideNav()"
+          >Products</a
+        >
       </li>
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" routerLink="/orders">Orders</a>
+        <a class="nav-link" routerLink="/orders" (click)="hideNav()">Orders</a>
       </li>
     </ul>
     <ul class="navbar-nav my-2 my-lg-0">
       <li class="nav-item dropdown" routerLinkActive="active">
-        <a class="nav-link" routerLink="/cart"
+        <a class="nav-link" routerLink="/cart" (click)="hideNav()"
           >Cart Items
           <span class="badge badge-success">{{
             (cart$ | async)?.totalItems || 0
