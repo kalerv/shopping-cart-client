@@ -8,3 +8,7 @@ export const loadProducts = createAction(
 export const productsLoaded = createAction(
   "[Products Page] Products Loaded", props<{ products: Product[] }>()
 )
+
+export const cleanProducts = createAction(
+  "[Navigation] Clean Products"
+)

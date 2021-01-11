@@ -12,6 +12,9 @@ export const productsReducer = createReducer(
   initialProductsState,
   on(ProductActions.productsLoaded, (state, action) => {
     return { products: action.products }
+  }),
+  on(ProductActions.cleanProducts, (state, action) => {
+    return { products: null }
   })
 )
 

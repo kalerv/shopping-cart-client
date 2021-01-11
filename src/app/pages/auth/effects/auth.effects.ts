@@ -13,10 +13,15 @@ export class AuthEffects {
         ofType(AuthActions.login),
         switchMap(action => {
           return this.authService.login(action.user.email, action.user.password).pipe(
+            tap(user => {
+              if (user) {
+                this.router.navigateByUrl('/home');
+              }
+            }),
             map(user => AuthActions.loginSuccess({ user }))
           )
-        }), take(1)
-      ), { dispatch: false });
+        })
+      ));
 
   loginSuccess$ = createEffect(() =>
     this.actions$
@@ -24,7 +29,6 @@ export class AuthEffects {
         ofType(AuthActions.loginSuccess),
         tap(action => {
           localStorage.setItem('user', JSON.stringify(action.user));
-          this.router.navigateByUrl('/home');
         })
       ), { dispatch: false })
 

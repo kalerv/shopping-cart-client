@@ -25,7 +25,6 @@ export class ProductsComponent implements OnInit {
   }
   onAddToCart (event) {
     this.store.dispatch(CartActions.addProductToCart({ product: event, userId: this.user.id }));
-    console.log('add cart:', event)
   }
 
   onBuyNow (event) {

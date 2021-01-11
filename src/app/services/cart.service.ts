@@ -12,7 +12,7 @@ export class CartService {
   }
 
   getCart (userId): Observable<Cart> {
-    return this.http.get<Cart>(`${environment.cart}/${userId}`);
+    return this.http.get<Cart>(`${environment.cart}/${userId}`).pipe(map(r => r['data']));
   }
   saveCart (cart: Cart): Observable<Cart> {
     return this.http.post(`${environment.cart}`, { ...cart }).pipe(
@@ -22,4 +22,6 @@ export class CartService {
   checkout (userId: string): Observable<any> {
     return this.http.post(`${environment.checkout}`, { userId });
   }
+
 }
+

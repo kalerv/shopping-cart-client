@@ -10,6 +10,6 @@ export const getAllProducts = createSelector(
 
 export const getExclusiveProducts = createSelector(
   getAllProducts,
-  products => products.filter(p => p.exclusive)
+  products => products && products.filter(p => p.exclusive)
 )
 

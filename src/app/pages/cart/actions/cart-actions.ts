@@ -1,7 +1,6 @@
 import { createAction, props } from "@ngrx/store";
 import { Cart } from "app/models/cart.interface";
 import { Product } from "app/models/product.interface";
-import { CartState } from "../reducers";
 
 
 export const getCartByUser = createAction(

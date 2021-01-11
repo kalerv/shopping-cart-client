@@ -9,7 +9,7 @@ export const environment = {
   cart: 'api/cart',
   products: 'api/products',
   checkout: 'api/checkout',
-  orders: 'apa/orders'
+  orders: 'api/orders'
 };
 
 /*

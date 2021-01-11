@@ -1,0 +1,19 @@
+.orders {
+  .order-details {
+    padding: 12px;
+  }
+  table {
+    img {
+      width: 50px;
+    }
+    p {
+      margin: 0;
+    }
+    .item-detail {
+      display: flex;
+      align-items: center;
+      height: 50px;
+      margin-top: 1rem;
+    }
+  }
+}

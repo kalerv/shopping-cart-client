@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { ProductActions } from '@shared/product-list/actions/products-actions-types';
 import { User } from './models/user.interface';
 import { AuthActions } from './pages/auth/actions/auth-actions.types';
 import { CartActions } from './pages/cart/actions/cart-action-types';
@@ -17,11 +18,13 @@ export class AppComponent implements OnInit {
     if (userProfile) {
       const user: User = JSON.parse(userProfile);
       this.store.dispatch(AuthActions.loginSuccess({ user }));
-      // this.loadCart(user.id)
+      this.store.dispatch(ProductActions.loadProducts());
+      this.loadCart(user.id)
     }
   }
 
-  // private loadCart (userId) {
-  //   this.store.dispatch(CartActions.getCartByUser({ userId }))
-  // }
+  private loadCart (userId) {
+    setTimeout(() => this.store.dispatch(CartActions.getCartByUser({ userId })), 1000)
+
+  }
 }

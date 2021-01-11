@@ -14,7 +14,6 @@ export class CartEffects {
     .pipe(
       ofType(CartActions.getCartByUser),
       switchMap(action => {
-        console.log('Cart Effect called!', action.type)
         return this.cartService.getCart(action.userId)
           .pipe(
             map(cart => CartActions.cartLoaded({ cart }))
@@ -32,7 +31,6 @@ export class CartEffects {
         CartActions.deleteProductFromCart
       ),
       map((action) => {
-        console.log('Effect Called:', action.type)
         let cart: Cart;
         this.store$.select(getCart).pipe(take(1)).subscribe((c => cart = c));
         return CartActions.updateCart({ cart })
@@ -44,7 +42,6 @@ export class CartEffects {
     .pipe(
       ofType(CartActions.updateCart),
       switchMap(action => {
-        console.log('I am called:')
         return this.cartService.saveCart(action.cart).pipe(
           map(c => CartActions.cartSaved({ cart: c }))
         );
