@@ -36,7 +36,11 @@
     </thead>
     <tbody>
       <tr *ngFor="let cartItem of (cart$ | async)?.cartItems; let i = index">
-        <th scope="row">{{ i + 1 }}</th>
+        <th scope="row">
+          <div class="misc">
+            <p class="lead">{{ i + 1 }}</p>
+          </div>
+        </th>
         <td>
           <div class="item">
             <img
@@ -44,7 +48,7 @@
               [alt]="cartItem.product.title"
             />
             <div class="details">
-              <h5 [title]="cartItem.product.title">
+              <h5 class="lead" [title]="cartItem.product.title">
                 {{ cartItem.product.title }}
               </h5>
             </div>
