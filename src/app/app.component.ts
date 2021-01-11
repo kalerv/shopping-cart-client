@@ -17,12 +17,14 @@ import { AppState } from './reducers';
 })
 export class AppComponent implements OnInit {
   titlesObj = PageTitles;
+  private rootPageTitle: string
   constructor(private store: Store<AppState>, private titleService: Title, private router: Router) {
+    this.rootPageTitle = titleService.getTitle();
     router.events.pipe(
       filter(event => event instanceof NavigationEnd)).
       subscribe(val => {
         let url = (val['url'] === '/' ? '/login' : val['url']).substr(1);
-        this.titleService.setTitle(this.titlesObj[url]);
+        this.titleService.setTitle(`${this.rootPageTitle} - ${this.titlesObj[url]}`);
       }, take(1));
   }
   ngOnInit () {
